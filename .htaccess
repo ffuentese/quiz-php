@@ -13,6 +13,8 @@ Deny from all
 </FilesMatch>
 
 
+
+
 # Disable directory browsing 
 Options -Indexes
 

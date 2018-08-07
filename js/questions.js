@@ -3,7 +3,7 @@
 function getQuestions(callback){
 
 
-$.getJSON('check_json_quiz.php', callback);
+$.post('check_json_quiz.php', callback);
 
 };
 

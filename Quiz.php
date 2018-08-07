@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = base64_encode(openssl_random_pseudo_bytes(32));
+}
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,6 +12,11 @@
         <title>Quiz</title>    
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+		
+		<script>
+		var csrf = { csrf_token: '<?php echo $_SESSION['csrf_token']; ?>' };
+		  
+	</script>
     </head>
     <body>
         <div class="container">

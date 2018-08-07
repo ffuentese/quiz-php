@@ -1,7 +1,7 @@
 function getQuestions(callback){
 
 
-$.getJSON('check_json_quiz.php', callback);
+$.post('check_json_quiz.php', callback);
 
 };
 
@@ -45,6 +45,9 @@ function getAnswers(callback){
 }
 
 $(function(){
+	  $.ajaxSetup({
+        data: window.csrf
+    });
     getQuestions(displayQuestions); 
     getAnswers(displayResult);
 });
