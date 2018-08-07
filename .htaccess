@@ -1,0 +1,18 @@
+# Deny access to .htaccess
+<Files .htaccess>
+Order allow,deny
+Deny from all
+</Files>
+
+
+
+# Deny access to files with extensions .json
+<FilesMatch "\.(json)$">
+Order allow,deny
+Deny from all
+</FilesMatch>
+
+
+# Disable directory browsing 
+Options -Indexes
+

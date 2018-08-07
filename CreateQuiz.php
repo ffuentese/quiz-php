@@ -3,7 +3,7 @@ session_start();
 if(!isset($_SESSION['name']) | !$_SESSION['name'])
 {
     header('Status: 301 Moved permantly', false, 301);
-    header('Location:/Login.php');
+    header('Location:Login.php');
     exit();
 } 
 ?>
@@ -37,19 +37,15 @@ if(!isset($_SESSION['name']) | !$_SESSION['name'])
         <div class="form-group">
         <label for="answers">Answers:</label>
         </div>
-        <div class="form-group">
-        <input class="form-control" type="text"  name="answers[]" required/>
+		<ol class="list-group">
+        <div class="form-group list-group-item">
+        <li><input class="form-control" type="text"  name="answers[]" required/></li>
         </div>
-        <div class="form-group">
-        <input class="form-control" type="text"  name="answers[]" required/>
-        </div>
-        <div class="form-group">
-        <input class="form-control" type="text" name="answers[]" required/>
-        </div>
-        <div class="form-group">
-        <input class="form-control" type="text" name="answers[]" required/>
+        <div class="form-group list-group-item">
+        <li><input class="form-control" type="text"  name="answers[]" required/></li>
         </div>
         <div class="append"></div>
+		</ol>
         <div class="form-group">
             <button class="btn add-answer">Add Answer</button>  <button class="btn del-answer">Delete Answer</button>
         </div>

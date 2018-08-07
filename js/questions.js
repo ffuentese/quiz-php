@@ -3,7 +3,7 @@
 function getQuestions(callback){
 
 
-$.getJSON('../check_json_quiz.php', callback);
+$.getJSON('check_json_quiz.php', callback);
 
 };
 
@@ -15,8 +15,8 @@ function renderJSON (result, idx){
       return `<li>Respuesta número ${index+1} es ${item}</li>`
     }).join('')}
     </ul>
-    <p>La respuesta correcta es la ${Number(result.right_answer)+1}</p>
-    <form id="del" action="../delete_question.php" method="POST">
+    <p>La respuesta correcta es la ${Number(result.right_answer)}</p>
+    <form id="del" action="delete_question.php" method="POST">
     <input type="hidden" name="id_question" value="${idx}" />
     <input type="submit" class="btn btn-danger" value="Delete" />
     </form>
@@ -37,7 +37,8 @@ function postQuestion(){
   
     $(document).on('submit','#qform',function(event){
         event.preventDefault();
-        $.post("../create_quiz_op.php", $('#qform').serialize());
+        $.post("create_quiz_op.php", $('#qform').serialize());
+		$('#qform')[0].reset();
         getQuestions(displayQuestions);
     });
     
@@ -47,8 +48,8 @@ function postQuestion(){
 function addAnswers(){
     $('.add-answer').on('click',function(e){ //on add input button click
         e.preventDefault();
-         var field = '<div class="form-group">'+
-        '<input class="form-control" type="text" name="answers[]" required/>' +
+         var field = '<div class="form-group list-group-item">'+
+        '<li><input class="form-control" type="text" name="answers[]" required/></li>' +
         '</div>';
          $('.append').append(field);
 });

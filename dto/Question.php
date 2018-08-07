@@ -56,9 +56,6 @@ class Question
         return $this->right_answer;
     }
     
-    function __destruct()
-    {
-			unset($this);
-	}
+   
     
 }

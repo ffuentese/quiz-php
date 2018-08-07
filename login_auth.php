@@ -13,12 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
             session_start();
             $_SESSION['name']=$_POST['username'];
 		    header('Status: 301 Moved permantly', false, 301);
-    		header('Location:/CreateQuiz.php');
+    		header('Location:CreateQuiz.php');
     		exit();
         }    
         else {
             header('Status: 301 Moved permantly', false, 301);
-    		header('Location:/Login.php');
+    		header('Location:Login.php');
     		exit();
         }
     }

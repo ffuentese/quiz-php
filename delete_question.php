@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['name']))
   $cq->questions = $result;
   if($cq->del_to_DAO()){
       header('Status: 301 Moved permantly', false, 301);
-      header('Location:/CreateQuiz.php');
+      header('Location:CreateQuiz.php');
       exit();
   } else {
       echo 'check your JSON';

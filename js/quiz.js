@@ -1,7 +1,7 @@
 function getQuestions(callback){
 
 
-$.getJSON('../check_json_quiz.php', callback);
+$.getJSON('check_json_quiz.php', callback);
 
 };
 
@@ -10,8 +10,8 @@ function renderJSON (result, index){
     <legend>${result.question}</legend>
     ${result.answers.map(function(item, i){
       return `<div class="form-check form-check-inline">
-      <label for="answer" class="form-check-label">
-      <input type="radio" class="form-check-input" name="answer-${index}" value="${i}" required>${item}</label>
+      <label for="answer-${index}-${i}" class="form-check-label">
+      <input type="radio" id="answer-${index}-${i}" class="form-check-input" name="answer-${index}" value="${i}" required>${item}</label>
       </div>`}).join('')}
      </div>`;
 };
@@ -40,7 +40,7 @@ function getAnswers(callback){
          var ans = $("input[type=radio]:checked").each(function() {
             return $(this).val().value;
          });
-         $.post("../quiz_eval.php", ans.serialize(), callback);
+         $.post("quiz_eval.php", ans.serialize(), callback);
     })
 }
 

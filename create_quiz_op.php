@@ -18,8 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     {
         $question->set_answer($_POST['answers'][$j]);
     }
-    
-    $question->set_right_answer($_POST['right_answer']);
+	try {
+    if ($_POST['right_answer'] > count($_POST['answers']) || $_POST['right_answer'] < 1) {
+		throw new Exception('Form Error: The right answer inserted was wrong.');
+	} 
+	
+	$question->set_right_answer($_POST['right_answer']);
 
     $questions[] = $question;   
             
@@ -31,8 +35,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         print_r("\n");
     } 
     else {
-        echo "Problema";
+		http_response_code(400);
+        json_encode(array(
+			'error' => array(
+				'msg' => 'No se pudo guardar',
+				'code' => 0,
+			),
+		));
     }
+	
+	} catch (Exception $e) {
+		http_response_code(400);
+		echo json_encode(array(
+			'error' => array(
+				'msg' => $e->getMessage(),
+				'code' => $e->getCode(),
+			),
+		));
+	}
+    
 
 }
 
