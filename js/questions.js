@@ -2,7 +2,6 @@
 
 function getQuestions(callback){
 
-
 $.post('check_json_quiz.php', callback);
 
 };
@@ -37,9 +36,10 @@ function postQuestion(){
   
     $(document).on('submit','#qform',function(event){
         event.preventDefault();
-        $.post("create_quiz_op.php", $('#qform').serialize());
+        $.post("create_quiz_op.php", $('#qform').serialize(), displayQuestions);
 		$('#qform')[0].reset();
-        getQuestions(displayQuestions);
+        //getQuestions(displayQuestions);
+		
     });
     
 }
@@ -66,6 +66,9 @@ function delAnswers(){
 }
 
 $(function(){
+	$.ajaxSetup({
+        data: window.csrf
+    });
     getQuestions(displayQuestions);
     postQuestion(getQuestions(displayQuestions));
     addAnswers();

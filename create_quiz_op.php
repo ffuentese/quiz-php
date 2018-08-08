@@ -3,9 +3,9 @@
 require_once("dto/Question.php");
 require_once("controller/CreateQuizController.php");
   header('Content-Type: application/json; charset=utf-8');
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-{
+ session_start();
+ if (isset($_POST['csrf_token']) && $_POST['csrf_token'] === $_SESSION['csrf_token'])  
+{ 
     $questions = [];
     $cq = new CreateQuizController();
     
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
  
     if($cq->save_to_DAO())
     {
-        print_r(json_encode($cq->get_from_DAO()));
+        print_r(json_encode($cq->get_from_DAO(), JSON_UNESCAPED_UNICODE));
         print_r("\n");
     } 
     else {

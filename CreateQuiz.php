@@ -6,6 +6,10 @@ if(!isset($_SESSION['name']) | !$_SESSION['name'])
     header('Location:Login.php');
     exit();
 } 
+
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = base64_encode(openssl_random_pseudo_bytes(32));
+}
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +20,10 @@ if(!isset($_SESSION['name']) | !$_SESSION['name'])
     <title>Create a Quiz</title>
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-
+	<script>
+		var csrf = { csrf_token: '<?php echo $_SESSION['csrf_token']; ?>' };
+		  
+	</script>
 </head>    
 <body>
 
@@ -54,6 +61,7 @@ if(!isset($_SESSION['name']) | !$_SESSION['name'])
         <input class="form-control" type="number" id="right_answer" name="right_answer" required/>
         </div>
         <div class="form-group">
+		<input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <input type="submit" name="submit" class="btn btn-primary js-submit" value="submit" />
         </div>
         </fieldset>
